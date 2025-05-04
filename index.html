@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Merge - Cross-Platform Chat</title>
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="script.js"></script>
+  </head>
+  <body>
+    <!-- Authentication Form -->
+    <div id="authForm" class="auth-container">
+      <h2>Welcome to Merge</h2>
+      <p>Log in or sign up to start chatting across platforms.</p>
+      <input type="email" id="email" placeholder="Email" />
+      <input type="password" id="password" placeholder="Password" />
+      <button onclick="signup()">Sign Up</button>
+      <button onclick="login()">Log In</button>
+    </div>
+
+    <!-- Chat Section -->
+    <div id="chatSection" class="chat-container" style="display: none">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <div class="logo">Merge</div>
+        <ul class="chat-list">
+          <li class="chat-item active">
+            <div class="chat-avatar">JD</div>
+            <div class="chat-info">
+              <h4>John Doe</h4>
+              <p>Hey, how are you doing?</p>
+            </div>
+            <span class="chat-time">2 min</span>
+            <i class="platform-icon fab fa-whatsapp"></i>
+            <!-- WhatsApp Icon -->
+          </li>
+          <li class="chat-item">
+            <div class="chat-avatar">SS</div>
+            <div class="chat-info">
+              <h4>Sarah Smith</h4>
+              <p>Check out this link!</p>
+            </div>
+            <span class="chat-time">15 min</span>
+            <i class="platform-icon fab fa-telegram"></i>
+            <!-- Telegram Icon -->
+          </li>
+          <li class="chat-item">
+            <div class="chat-avatar">MJ</div>
+            <div class="chat-info">
+              <h4>Mike Johnson</h4>
+              <p>Meeting at 3pm tomorrow</p>
+            </div>
+            <span class="chat-time">1 hr</span>
+            <i class="platform-icon fab fa-facebook-messenger"></i>
+            <!-- Messenger Icon -->
+          </li>
+        </ul>
+      </div>
+
+      <!-- Chat Area -->
+      <div class="chat-area">
+        <div class="chat-header">
+          <h3>John Doe</h3>
+          <span class="status">Online</span>
+        </div>
+        <div class="chat-messages">
+          <div class="message received">
+            <p>That's great! How's it coming along?</p>
+            <span class="time">10:33 AM</span>
+            <i class="platform-icon fab fa-whatsapp"></i>
+            <!-- WhatsApp Icon -->
+          </div>
+          <div class="message sent">
+            <p>
+              Pretty well actually. I should have the first draft ready by
+              tomorrow.
+            </p>
+            <span class="time">10:35 AM</span>
+            <i class="platform-icon fab fa-telegram"></i>
+            <!-- Telegram Icon -->
+          </div>
+        </div>
+        <div class="chat-input">
+          <input type="text" id="message" placeholder="Type a message" />
+          <button onclick="sendMessage()">Send</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
