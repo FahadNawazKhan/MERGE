@@ -1,7 +1,20 @@
 // Import Firebase modules
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
-import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut
+} from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  query,
+  orderBy,
+  onSnapshot,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -17,8 +30,8 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
 const db = getFirestore(app);
+const auth = getAuth(app);
 
 // Attach signup function to the global window object
 window.signup = async function () {
@@ -36,6 +49,7 @@ window.signup = async function () {
 window.login = async function () {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
+
   try {
     await signInWithEmailAndPassword(auth, email, password);
 
@@ -43,8 +57,7 @@ window.login = async function () {
     document.getElementById("authForm").style.display = "none";
     document.getElementById("chatSection").style.display = "flex";
 
-    // Populate the chat list and listen for messages
-    populateChatList();
+    // Start listening for messages
     listenForMessages();
   } catch (err) {
     alert(err.message);
@@ -64,15 +77,16 @@ window.logout = async function () {
 
 // Attach sendMessage function to the global window object
 window.sendMessage = async function () {
-  const msg = document.getElementById("message").value;
+  const msg = document.getElementById("messageInput").value; // <-- FIXED ID
   if (msg.trim() === "") return;
 
   try {
     await addDoc(collection(db, "messages"), {
       text: msg,
+      sender: auth.currentUser.email,
       timestamp: serverTimestamp(),
     });
-    document.getElementById("message").value = "";
+    document.getElementById("messageInput").value = ""; // <-- FIXED ID
   } catch (err) {
     alert(err.message);
   }
@@ -110,8 +124,12 @@ function populateChatList() {
 
 // Listen for messages in real time
 function listenForMessages() {
-  const messagesDiv = document.querySelector(".chat-messages");
-  const messagesQuery = query(collection(db, "messages"), orderBy("timestamp"));
+  const messagesDiv = document.getElementById("chatMessages");
+
+  const messagesQuery = query(
+    collection(db, "messages"),
+    orderBy("timestamp", "asc")
+  );
 
   onSnapshot(messagesQuery, (snapshot) => {
     messagesDiv.innerHTML = ""; // Clear previous messages
