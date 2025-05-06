@@ -60,28 +60,14 @@
       <!-- Chat Area -->
       <div class="chat-area">
         <div class="chat-header">
-          <h3>John Doe</h3>
+          <h3>Chat with John Doe</h3>
           <span class="status">Online</span>
         </div>
-        <div class="chat-messages">
-          <div class="message received">
-            <p>That's great! How's it coming along?</p>
-            <span class="time">10:33 AM</span>
-            <i class="platform-icon fab fa-whatsapp"></i>
-            <!-- WhatsApp Icon -->
-          </div>
-          <div class="message sent">
-            <p>
-              Pretty well actually. I should have the first draft ready by
-              tomorrow.
-            </p>
-            <span class="time">10:35 AM</span>
-            <i class="platform-icon fab fa-telegram"></i>
-            <!-- Telegram Icon -->
-          </div>
+        <div class="chat-messages" id="chatMessages">
+          <!-- Messages will be dynamically added here -->
         </div>
         <div class="chat-input">
-          <input type="text" id="message" placeholder="Type a message" />
+          <input type="text" id="messageInput" placeholder="Type a message" />
           <button onclick="sendMessage()">Send</button>
         </div>
       </div>
